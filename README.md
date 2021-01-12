@@ -8,7 +8,7 @@ The Game of Life, also known simply as Life, is a cellular automaton devised by 
 4- Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
 ## Simulation
-The simulation made using SFML (Simple and Fast Multimedia Library) based on Open-GL. The size was fixed to be 50 x 50 yet it can be of any size.
+The simulation made using SFML (Simple and Fast Multimedia Library) based on Open-GL. The size was fixed to be 50x50 yet it can be of any size.
 ### Controls
 1- Use ```Space``` to Start / Stop the simulation at any given moment (it starts freazed).
 2- Use the ```Arrow Keys``` to move around the grid and see all the cells.
