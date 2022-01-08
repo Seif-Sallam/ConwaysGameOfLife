@@ -141,3 +141,15 @@ int Grid::CountAlive(const int &x, const int &y)
 
 	return counter;
 }
+
+void Grid::Reset()
+{
+	for (int i = 0; i < m_iWidth; i++)
+	{
+		for (int j = 0; j < m_iHeight; j++)
+		{
+			Cell *cell = GetCell(i, j);
+			cell->alive = false;
+		}
+	}
+}

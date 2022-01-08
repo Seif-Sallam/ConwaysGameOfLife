@@ -168,7 +168,11 @@ void Demo::ImGuiLayer()
 	}
 	ImGui::Separator();
 	ImGui::Text("Alive cells: %d", m_AliveCount);
-
+	ImGui::Separator();
+	if (ImGui::Button("Reset"))
+	{
+		m_grid->Reset();
+	}
 	ImGui::End();
 }
 

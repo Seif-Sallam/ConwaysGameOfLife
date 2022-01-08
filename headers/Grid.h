@@ -32,7 +32,7 @@ public:
 	void Stop();	   // Stop simulation
 	void Start();	   // Start Simulation
 	bool IsUpdating(); // Check if the simulation is working
-
+	void Reset();
 	Cell *GetCell(const int &index);
 	Cell *GetCell(const int &x, const int &y);
 	~Grid();
