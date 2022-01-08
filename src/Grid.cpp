@@ -1,6 +1,6 @@
 #include "Grid.h"
 
-Grid::Grid(const int& gWidth, const int& gHeight)
+Grid::Grid(const int &gWidth, const int &gHeight)
 	: m_iWidth(gWidth), m_iHeight(gHeight)
 {
 	// Initializing the needed data
@@ -8,14 +8,14 @@ Grid::Grid(const int& gWidth, const int& gHeight)
 	m_cells = new Cell[gWidth * gHeight];
 
 	// Setting the default values for all the cells
-	for(int x = 0; x < m_iWidth; x++)
+	for (int x = 0; x < m_iWidth; x++)
 		for (int y = 0; y < m_iHeight; y++)
 		{
 			int index = y * m_iWidth + x;
 			m_cells[index].alive = false;
 			m_cells[index].x = x;
 			m_cells[index].y = y;
-			
+
 			// Attaching to each cell the surrounding cells
 			AttachSurrCells(x, y);
 		}
@@ -36,7 +36,9 @@ void Grid::Update()
 			c->alive = false;
 		// Reviving what should be revived
 		for (auto c : m_revivingVec)
+		{
 			c->alive = true;
+		}
 
 		m_killingVec.clear();
 		m_revivingVec.clear();
@@ -58,14 +60,14 @@ bool Grid::IsUpdating()
 	return m_bUpdating;
 }
 
-Cell* Grid::GetCell(const int& index)
+Cell *Grid::GetCell(const int &index)
 {
-	if(index > -1 && index < m_iHeight * m_iWidth)
+	if (index > -1 && index < m_iHeight * m_iWidth)
 		return &m_cells[index];
 	return nullptr;
 }
 
-Cell* Grid::GetCell(const int& x, const int& y)
+Cell *Grid::GetCell(const int &x, const int &y)
 {
 	if (x >= 0 && x <= m_iWidth - 1 && y >= 0 && y <= m_iHeight - 1)
 		return &m_cells[y * m_iWidth + x];
@@ -76,14 +78,13 @@ Grid::~Grid()
 {
 	delete[] m_cells;
 }
-
-void Grid::AttachSurrCells(const int& x, const int& y)
+void Grid::AttachSurrCells(const int &x, const int &y)
 {
 	int index = y * m_iWidth + x;
 	// Attach each cells' arounds
 	m_cells[index].aroundCells[Positions::Up] = GetCell(x, y - 1);
 	m_cells[index].aroundCells[Positions::Down] = GetCell(x, y + 1);
-	m_cells[index].aroundCells[Positions::Right] = GetCell(x + 1 , y);
+	m_cells[index].aroundCells[Positions::Right] = GetCell(x + 1, y);
 	m_cells[index].aroundCells[Positions::Left] = GetCell(x - 1, y);
 
 	// Diagonal
@@ -93,12 +94,12 @@ void Grid::AttachSurrCells(const int& x, const int& y)
 	m_cells[index].aroundCells[Positions::DownLeft] = GetCell(x - 1, y + 1);
 }
 
-void Grid::UpdateCellState(const int& x, const int& y)
+void Grid::UpdateCellState(const int &x, const int &y)
 {
-	Cell* currentCell = GetCell(x, y);
+	Cell *currentCell = GetCell(x, y);
 	int aliveSurrCells = CountAlive(x, y);
-	
-	if (currentCell->alive) 
+
+	if (currentCell->alive)
 	{
 		if (aliveSurrCells < 2)
 		{
@@ -123,14 +124,14 @@ void Grid::UpdateCellState(const int& x, const int& y)
 	}
 }
 
-int Grid::CountAlive(const int& x, const int& y)
+int Grid::CountAlive(const int &x, const int &y)
 {
 	int counter = 0;
-	Cell* c = GetCell(x, y);
+	Cell *c = GetCell(x, y);
 
 	for (int i = 0; i < 8; i++)
 	{
-		Cell* surr = c->aroundCells[i];
+		Cell *surr = c->aroundCells[i];
 		if (surr != nullptr)
 		{
 			if (surr->alive)

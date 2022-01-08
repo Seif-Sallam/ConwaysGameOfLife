@@ -8,11 +8,14 @@ CC:=g++
 HEADERS_DIR:= ./headers/
 SRC_DIR:= ./src/
 
-LIBS:= -lGL -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-SFML_DIR= ./../Thirdparty/SFMLLinux/
-LIBS_INC= -L$(SFML_DIR)/lib/
+LIBS:= -limgui -lGL -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+
+SFML_DIR= ./Thirdparty/SFMLLinux/
+IMGUI_DIR=./Thirdparty/imgui/
+LIBS_INC= -L$(SFML_DIR)/lib/ -L$(IMGUI_DIR)BuildLib/
 
 SFML_INC= $(SFML_DIR)/include/
+IMGUI_INC= $(IMGUI_DIR)
 
 OBJECTS_DIR:= Objs/
 
@@ -24,7 +27,9 @@ SOURCES:= $(shell find $(SRC_DIR) -name  '*.cpp')
 HEADERS_DIRS:=$(sort $(dir $(shell find $(HEADERS_DIR) -name '*.h')))
 
 INC= $(addprefix -I, $(HEADERS_DIRS))
-CCFLAGS= $(INC) -std=c++17 -g 
+INC+= -I$(IMGUI_INC)
+
+CCFLAGS= $(INC) -std=c++17
 OBJECTS:= $(patsubst %.cpp, %.o, $(subst ./src/, ./Objs/, $(SOURCES)))
 
 VPATH_SRC:=$(sort $(dir $(VPATH_SRC)))
@@ -45,6 +50,7 @@ $(OUTPUT_DIR)$(OUTPUT): $(OBJECTS)
 
 prep:
 	@mkdir -p $(CREATE_DIRS)
+	@cd $(IMGUI_DIR) && $(MAKE) -s all
 
 $(OBJECTS): $(OBJECTS_DIR)%.o : $(SRC_DIR)%.cpp	
 	@printf '$(bold)========== Compiling $(red)$(notdir $^)$(NC)$(bold) ======\n$(NC)'

@@ -15,27 +15,28 @@ public:
 private:
 	void EventHandler();
 	void Update();
+	void ImGuiLayer();
 	void Draw();
 
 private:
-	sf::RenderWindow* m_window;
-	sf::Event* m_event;
-	
+	sf::RenderWindow *m_window;
+	sf::Event *m_event;
+
 	sf::View m_view;
 	sf::Vector2f m_fOffset;
 	sf::Vector2f m_fCellSize;
 	sf::Vector2f m_fViewPos;
 
 	float m_fSpeed;
+	int32_t m_AliveCount;
 
-	Grid* m_grid;
+	Grid *m_grid;
 	int gHeight;
 	int gWidth;
 
 	sf::Clock m_clock;
 	float m_fElapsedTime = 0.f;
-	sf::RectangleShape* m_gridShapes;
-	
+	sf::RectangleShape *m_gridShapes;
+
 	sf::RectangleShape borders[4];
 };
-
