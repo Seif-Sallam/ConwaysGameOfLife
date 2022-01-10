@@ -89,20 +89,6 @@ void Demo::EventHandler()
 				c->alive = !c->alive;
 			}
 		}
-		if (m_event->type == sf::Event::KeyPressed && m_event->key.code == sf::Keyboard::Space)
-		{
-			// An indicator that tells if the gird started moving or not
-			if (m_grid->IsUpdating())
-			{
-				m_grid->Stop();
-				std::cout << "Stopped\n";
-			}
-			else
-			{
-				m_grid->Start();
-				std::cout << "Started\n";
-			}
-		}
 	}
 }
 
