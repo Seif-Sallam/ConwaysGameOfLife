@@ -16,9 +16,19 @@ target_include_directories(
     ./headers/
 )
 
+set(OS_LIBRARIES
+    opengl32
+)
+
+if (UNIX)
+    set(OS_LIBRARIES
+        GL
+    )
+endif()
+
 target_link_libraries(ConwayGameOfLife
     PRIVATE
-    GL
+    ${OS_LIBRARIES}
     imgui
     sfml-graphics
     sfml-window

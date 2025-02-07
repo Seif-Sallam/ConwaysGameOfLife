@@ -79,8 +79,8 @@ void Demo::EventHandler()
 			// To know which cell we are looking at
 			auto mousePos = sf::Mouse::getPosition(*m_window);
 
-			int x = (mousePos.x / m_fCellSize.x) + (m_fOffset.x / m_fCellSize.x);
-			int y = (mousePos.y / m_fCellSize.y) + (m_fOffset.y / m_fCellSize.y);
+			int x = int((mousePos.x / m_fCellSize.x) + (m_fOffset.x / m_fCellSize.x));
+			int y = int((mousePos.y / m_fCellSize.y) + (m_fOffset.y / m_fCellSize.y));
 
 			auto c = m_grid->GetCell(x, y);
 
